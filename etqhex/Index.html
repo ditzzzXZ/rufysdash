@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Escape the Quiet House: Expanded</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>Escape the Quiet House</h1>
+    <img id="game-image" src="assets/scene-1.jpg" alt="Locked room">
+    <div id="game-text">
+      <p>Lila blinks awake. She’s on a dusty couch in a small, locked room. Windows are boarded; a single bulb flickers. A note on the coffee table reads: "Three paths, three fates. Find the truth — or be lost."</p>
+      <p>What does she check first?</p>
+    </div>
+    <div class="choices" id="choices">
+      <button onclick="goToScene('scene-2')">Check the coffee table drawer</button>
+      <button onclick="goToScene('scene-3')">Walk to the corner door</button>
+      <button onclick="goToScene('scene-4')">Inspect the boarded window</button>
+    </div>
+    <!-- Hint button (new!) -->
+    <button id="hint-btn" onclick="showHint()">Need a hint?</button>
+    <div id="hint-text" class="hint"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
