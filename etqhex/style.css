@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #1a1a1a;
+  font-family: 'Georgia', serif;
+  color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 30px 20px;
+}
+
+.game-container {
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+  background: #2d2d2d;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+h1 {
+  color: #ff8c94;
+  margin-bottom: 25px;
+  font-size: 28px;
+  border-bottom: 2px solid #ff8c94;
+  padding-bottom: 10px;
+}
+
+#game-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+#game-text {
+  font-size: 19px;
+  line-height: 1.7;
+  margin-bottom: 35px;
+  text-align: left;
+}
+
+.choices button {
+  background: #ff8c94;
+  color: #1a1a1a;
+  border: none;
+  padding: 16px 32px;
+  margin: 0 12px 12px 0;
+  border-radius: 8px;
+  font-size: 17px;
+  font-family: 'Georgia', serif;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.choices button:hover {
+  background: #ff6b75;
+}
+
+/* Hint button & text (new) */
+#hint-btn {
+  background: #4a7c59;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  margin-top: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#hint-btn:hover {
+  background: #3a6c49;
+}
+
+.hint {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #b3b3b3;
+  display: none;
+}
+
+/* Mobile fixes */
+@media (max-width: 500px) {
+  .choices button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  #game-image {
+    height: 300px;
+  }
+    }
