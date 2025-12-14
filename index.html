@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Identity - FULL GAME</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Consolas', 'Courier New', monospace; }
+        body { background: #1a1a1a; color: #fff; overflow: hidden; }
+        .screen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; text-align: center; }
+        
+        /* Menu Awal */
+        #menu-screen { display: flex; }
+        #menu-screen h1 { color: #00ff00; font-size: 40px; margin-bottom: 15px; text-shadow: 0 0 10px #00ff00; }
+        #menu-screen .subtitle { color: #ff69b4; font-size: 20px; margin-bottom: 30px; }
+        .options { display: flex; flex-direction: column; gap: 15px; width: 250px; margin: 0 auto; }
+        .btn { padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 18px; transition: 0.3s; }
+        .btn-primary { background: #00ff00; color: #000; font-weight: bold; }
+        .btn-primary:hover { background: #33ff33; box-shadow: 0 0 15px #00ff00; }
+        .btn-secondary { background: #ff69b4; color: #fff; }
+        .btn-secondary:hover { background: #ff87b8; box-shadow: 0 0 15px #ff69b4; }
+
+        /* Create Profile */
+        #profile-screen { display: none; }
+        #profile-screen h2 { color: #00ff00; margin-bottom: 20px; }
+        #profile-screen input { margin: 10px 0; padding: 10px; width: 280px; background: #333; color: #fff; border: 2px solid #00ff00; border-radius: 5px; font-size: 16px; }
+
+        /* Desktop GUI */
+        #desktop-screen { display: none; background: #e0e0e0; color: #000; position: relative; }
+        .taskbar { width: 100%; height: 45px; background: #333; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; font-size: 14px; }
+        .taskbar .timer { color: #00ff00; font-weight: bold; }
+        .taskbar .status { color: #ff69b4; }
+        .desktop-icons { display: flex; gap: 40px; margin-top: 60px; flex-wrap: wrap; justify-content: center; }
+        .icon { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; padding: 10px; border-radius: 8px; }
+        .icon:hover { background: #cccccc; }
+        .icon .icon-img { width: 70px; height: 70px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-size: 20px; font-weight: bold; }
+        #terminal-icon { background: #000; color: #00ff00; box-shadow: 0 0 5px #000; }
+        #zaqa-icon { background: #4285f4; color: #fff; box-shadow: 0 0 5px #4285f4; }
+        #qaqa-icon { background: #ff69b4; color: #fff; box-shadow: 0 0 5px #ff69b4; }
+        .wallpaper-text { position: absolute; bottom: 20px; right: 20px; font-size: 12px; color: #aaaaaa; opacity: 0.5; }
+
+        /* Aplikasi Jendela */
+        .app-window { display: none; position: absolute; background: #fff; border: 3px solid #333; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.3); z-index: 10; }
+        .app-header { height: 40px; background: #333; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; cursor: move; font-weight: bold; }
+        .app-header .close-btn { background: #ff4444; color: #fff; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .app-content { padding: 20px; height: 320px; overflow-y: auto; font-size: 15px; }
+        #terminal-window { background: #000; color: #00ff00; border-color: #00ff00; }
+        #terminal-window .app-header { background: #111; }
+        #zaqa-window .app-content { background: #f0f8ff; }
+        #zaqa-window .app-header { background: #4285f4; }
+        #qaqa-window .app-content { background: #fff0f5; color: #ff69b4; }
+        #qaqa-window .app-header { background: #ff69b4; }
+        .input-field { width: 100%; padding: 10px; margin: 10px 0; border: 2px solid #333; border-radius: 5px; font-size: 15px; }
+        .app-btn { padding: 8px 15px; font-size: 14px; margin-left: 5px; }
+        .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #000; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px #00ff00; z-index: 100; display: none; }
+        .popup h3 { color: #00ff00; margin-bottom: 20px; font-size: 24px; }
+        .popup p { margin-bottom: 25px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <!-- Menu Awal -->
+    <div id="menu-screen" class="screen">
+        <div>
+            <h1>NEW IDENTITY</h1>
+            <p class="subtitle">⚡ ESCAPE FROM YOUR PAST ⚡</p>
+            <div class="options">
+                <button class="btn btn-primary" onclick="showScreen('profile-screen')">START GAME</button>
+                <button class="btn btn-secondary" onclick="showSettings()">SETTINGS</button>
+                <button class="btn btn-secondary" onclick="window.close()">EXIT</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Profile -->
+    <div id="profile-screen" class="screen">
+        <h2>CREATE YOUR OLD IDENTITY</h2>
+        <input type="text" id="old-name" placeholder="Nama lama mu..." required>
+        <input type="text" id="old-country" placeholder="Negara asal mu..." required>
+        <button class="btn btn-primary" onclick="saveProfile()">SAVE & START ESCAPE</button>
+    </div>
+
+    <!-- Desktop GUI -->
+    <div id="desktop-screen" class="screen">
+        <div class="taskbar">
+            <div>ESCAPE OS v1.0</div>
+            <div>
+                <span class="timer" id="timer">15:00</span> | 
+                <span class="status" id="status">JEJAK: 3/3 | ID: TIDAK ADA</span>
+            </div>
+        </div>
+        <div class="desktop-icons">
+            <div class="icon" onclick="openApp('terminal-window')">
+                <div class="icon-img" id="terminal-icon">🖥️ TERM</div>
+                <span>Terminal</span>
+            </div>
+            <div class="icon" onclick="openApp('zaqa-window')">
+                <div class="icon-img" id="zaqa-icon">🌐 ZAQ</div>
+                <span>ZAQAWASHER</span>
+            </div>
+            <div class="icon" onclick="openApp('qaqa-window')">
+                <div class="icon-img" id="qaqa-icon">📸 QAQA</div>
+                <span>qaqaPhotos</span>
+            </div>
+        </div>
+        <div class="wallpaper-text">HIDE. DELETE. ESCAPE. — REPEAT —</div>
+    </div>
+
+    <!-- Terminal App -->
+    <div id="terminal-window" class="app-window" style="width: 85%; top: 110px; left: 20px;">
+        <div class="app-header" onmousedown="startDrag(event, this.parentElement)">
+            <span>Terminal Hack v2.1</span>
+            <button class="close-btn" onclick="closeApp('terminal-window')">X</button>
+        </div>
+        <div class="app-content" id="terminal-content">
+            > [SYSTEM] KONEKSI JARINGAN BERHASIL<br>
+            > [SYSTEM] PERINGATAN: POLISI SEDANG MENELUSURI [NAMA LAMA]<br>
+            > KETIK 'help' UNTUK DAFTAR PERINTAH<br><br>
+        </div>
+        <div style="padding: 0 20px 20px 20px;">
+            <input type="text" class="input-field" id="terminal-input" placeholder="Ketik perintah...">
+            <button class="btn btn-primary app-btn" onclick="runTerminalCmd()">JALANKAN</button>
+        </div>
+    </div>
+
+    <!-- ZAQAWASHER Browser -->
+    <div id="zaqa-window" class="app-window" style="width: 85%; top: 110px; left: 20px;">
+        <div class="app-header" onmousedown="startDrag(event, this.parentElement)">
+            <span>ZAQAWASHER Browser</span>
+            <button class="close-btn" onclick="closeApp('zaqa-window')">X</button>
+        </div>
+        <div class="app-content" id="zaqa-content">
+            <div style="margin-bottom: 15px;">
+                <input type="text" class="input-field" id="zaqa-url" placeholder="Masukkan URL (contoh: db-leak.net)">
+                <button class="btn btn-primary app-btn" onclick="browseZaqa()">GO</button>
+            </div>
+            <div id="zaqa-page" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #4285f4;">
+                > BUKA SITUS UNTUK MENCARI PETUNJUK
+            </div>
+        </div>
+    </div>
+
+    <!-- qaqaPhotos Gallery -->
+    <div id="qaqa-window" class="app-window" style="width: 85%; top: 110px; left: 20px;">
+        <div class="app-header" onmousedown="startDrag(event, this.parentElement)">
+            <span>qaqaPhotos</span>
+            <button class="close-btn" onclick="closeApp('qaqa-window')">X</button>
+        </div>
+        <div class="app-content" id="qaqa-content">
+            <h3 style="margin-bottom: 15px; text-decoration: underline;">DAFTAR IDENTITAS BARU:</h3>
+            <div id="photo-list" style="margin-bottom: 20px;">-- BELUM ADA FOTO IDENTITAS --</div>
+            <div id="active-id" style="font-weight: bold; margin-top: 20px; padding-top: 10px; border-top: 2px solid #ff69b4;">
+                ID AKTIF: TIDAK ADA
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Game Over & Menang -->
+    <div id="win-popup" class="popup">
+        <h3>SELAMAT! 🎉</h3>
+        <p>Semua jejakmu terhapus, identitas baru aktif, dan tiketmu siap pakai!</p>
+        <p>Kamu berhasil melarikan diri dari masa lalu!</p>
+        <button class="btn btn-primary" onclick="restartGame()">MAIN LAGI</button>
+    </div>
+
+    <div id="gameover-popup" class="popup">
+        <h3>GAME OVER! ❌</h3>
+        <p>Waktu habis... Polisi telah menemukanmu!</p>
+        <button class="btn btn-primary" onclick="restartGame()">COBA LAGI</button>
+    </div>
+
+    <div id="settings-popup" class="popup">
+        <h3>PENGATURAN</h3>
+        <p>Kecepatan teks: <input type="range" min="50" max="200" value="100" id="text-speed"></p>
+        <p>Musik latar: <input type="checkbox" id="music-toggle"></p>
+        <button class="btn btn-primary" onclick="closePopup('settings-popup')">SIMPAN</button>
+    </div>
+
+    <!-- Hubungkan ke file JS -->
+    <script src="sc.js"></script>
+</body>
+  </html>
+    
